@@ -5,36 +5,36 @@ spring:
         locator:
           enabled: true
       routes:
-      - id: adminService
-        uri: lb://adminService
+      - id: serviceAdmin
+        uri: lb://service-admin
         predicates:
-        - Path=/srva/**
+        - Path=/srvadmin/**
         filters:
-        - RewritePath=/srva/(?<segment>.*), /$\{segment}
+        - RewritePath=/srvadmin/(?<segment>.*), /$\{segment}
         - name: Hystrix
           args:
-            name: monitor-srvA
-            fallbackUri: forward:/fallback/adminService
-      - id: companyService
-        uri: lb://companyService
+            name: monitor-srvAdmin
+            fallbackUri: forward:/fallback/serviceAdmin
+      - id: ServiceCompany
+        uri: lb://service-Company
         predicates:
-        - Path=/srva/**
+        - Path=/srvcompany/**
         filters:
-        - RewritePath=/srva/(?<segment>.*), /$\{segment}
+        - RewritePath=/srvcompany/(?<segment>.*), /$\{segment}
         - name: Hystrix
           args:
-            name: monitor-srvA
-            fallbackUri: forward:/fallback/companyService
-      - id: customerService
-        uri: lb://customerService
+            name: monitor-srvCompany
+            fallbackUri: forward:/fallback/serviceCompany
+        - id: ServiceCustomer
+        uri: lb://service-Customer
         predicates:
-        - Path=/srvb/**
+        - Path=/srvcustomer/**
         filters:
-        - RewritePath=/srvb/(?<segment>.*), /$\{segment}
+        - RewritePath=/srvcustomer/(?<segment>.*), /$\{segment}
         - name: Hystrix
           args:
-            name: monitor-srvB
-            fallbackUri: forward:/fallback/customerService  
+            name: monitor-srvCustomer
+            fallbackUri: forward:/fallback/serviceCustomer
       - id: MQActivityService
         uri: lb://activity
         predicates:
