@@ -5,7 +5,7 @@ spring:
   cloud:
     consul:
       discovery:
-        instanceId: AdminService
+        instanceId: ServiceAdmin
         health-check-interval: 5s
       config:
         management: 
